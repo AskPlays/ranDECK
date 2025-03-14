@@ -1,0 +1,50 @@
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap'); */
+* {
+  font-family: "JetBrains Mono", monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  width: calc(710px * 10);
+}
+
+#cards * {
+  box-sizing: border-box;
+  font-display: block;
+  font-weight: 600;
+}
+
+#cards > div {
+  width: 710px;
+  height: 1065px;
+  font-size: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.Unit {
+  background-color: red;
+}
+
+.Structure {
+  background-color: blue;
+}
+
+.Action {
+  background-color: yellow;
+}
+
+.Legend {
+  background-color: purple;
+}
+
+.Prophecy {
+  background-color: orange;
+}

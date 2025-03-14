@@ -1,0 +1,482 @@
+Linkmulti = "Count"
+LINK = "1mWUGI2zzvp_bSTw6kE5K68mHg2SzoRiT9zgaMc7qE3I!Deck"
+
+
+;Settings
+Unit = CM
+
+;Icons
+htmlimage = , (Wood), "https://drive.google.com/thumbnail?id=1pmcluJuk8wZNhs8oyjJ26VEAt_4QAgTH&sz=w800", 0.3, 0.3, P
+htmlimage = , (Iron), "https://drive.google.com/thumbnail?id=1vaSnN_7Ca3mxtkGh_5LuQnuLlgAbrPBY&sz=w800", 0.3, 0.3, P
+htmlimage = , (Fiber), "https://drive.google.com/thumbnail?id=1EHyPe828R2odaE90mvKLb-5mHwkQqKdm&sz=w800", 0.3, 0.3, P
+htmlimage = , (Marble), "https://drive.google.com/thumbnail?id=1zubSfKkTp1x_-SvQWZwTftn9BHxwf2PP&sz=w800", 0.3, 0.3, P
+htmlimage = , (TempCoins), "https://drive.google.com/thumbnail?id=1AB5213CPJyDR3ak1OzeGjXfF6GUvGm1m&sz=w800", 0.3, 0.3, P
+htmlimage = , (Tap), "https://drive.google.com/thumbnail?id=1riTIeNWKasGuBNzKxzhskkB6wFmWdJg0&sz=w256", 0.3, 0.3, P
+htmlimage = , (Coin), "https://drive.google.com/thumbnail?id=1KM2eQgrtosNKqZwkP-DklZed60UwZgSc&sz=w800", 0.3, 0.3, P
+htmlimage = , (NatPnt), "https://drive.google.com/thumbnail?id=1FjBEjwlWZM1Odj4S2p_5ybQ_DDAlDIlo&sz=w800", 0.3, 0.3, P
+htmlimage = , (Nature), "https://drive.google.com/thumbnail?id=1ILCiAH5pOt1AXUCmvpm5hBhFOB4EqmXx&sz=w800", 0.2, 0.2, P
+
+htmlimage = , (Water), "https://drive.google.com/thumbnail?id=1GD7hN6higi8UrRLbv2v5W8FPGauXEfsl&sz=w512", 0.5, 0.5, PM
+htmlimage = , (Shallow Water), "https://drive.google.com/thumbnail?id=1jy044jWaytCnoshzqj4trachbUfqlSkv&sz=w512", 0.5, 0.5, PM
+htmlimage = , (Coral Water), "https://drive.google.com/thumbnail?id=1Na69DqnQ6B-fFxgMKjQXlC_DS8u5eRHr&sz=w512", 0.5, 0.5, PM
+htmlimage = , (Deep Water), "https://drive.google.com/thumbnail?id=1EntALjW1E72F2nvebSuR91Af1TwZrCGg&sz=w512", 0.5, 0.5, PM
+
+
+;Units--------------------------------------------------------------------------------------------------------------------------------------------------------------
+if = [Type] = Unit
+RECTANGLE=,0%,0%,{5007/50}%,{45211/900}%,#000000
+IMAGE="1-{(IMAGE)}",[IMAGEURL],0%,{169/450}%,100%,{44957/900}%
+POLYGON=,{37489/600}%,{873/20}%,{40789/600}%,{3196/225}%,6,30,#D3212D,#FFFFFF,0.06
+
+if = [Nature Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#D3212D,#30F129,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(NATURE COST)}",[NATURE COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [BONE] <> ""
+if = [Void Cost] <> ""
+RECTANGLE=,{9069/100}%,{2173/300}%,{1777/200}%,{9313/900}%,#D3212D,#D3D3D3,0.06
+FONT=JetBrains Mono,12,T,#000000,#000000
+TEXT="1-{(BONE)}",[BONE],{18279/200}%,{9821/900}%,{299/40}%,{1919/300}%
+else
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#D3212D,#D3D3D3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(BONE)}",[BONE],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+endif
+if = [Void Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#D3212D,#000000,0.06
+if = - @ [Void Cost]
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{1543/20}%,0%,{6643/300}%,{4741/450}%
+else
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{48913/600}%,{253/-900}%,{5839/300}%,{4741/450}%
+endif
+endif
+
+if = [SHALLOW] <> ""
+RECTANGLE=,{45359/600}%,{111/20}%,{4739/600}%,{6857/900}%,#D3212D,#89CFF0,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(SHALLOW)}",[SHALLOW],{22849/300}%,{491/60}%,{863/120}%,{649/150}%
+endif
+if = [CORAL] <> ""
+RECTANGLE=,{55007/600}%,{9143/900}%,{409/50}%,{649/100}%,#D3212D,#FF9966,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(CORAL)}",[CORAL],{921/10}%,{10583/900}%,{863/120}%,{649/150}%
+endif
+if = [DEEP] <> ""
+RECTANGLE=,{25049/300}%,{3217/450}%,{409/50}%,{7111/900}%,#D3212D,#00308F,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(DEEP)}",[DEEP],{25303/300}%,{9059/900}%,{863/120}%,{649/150}%
+endif
+if = [WATER COST] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#D3212D,#0070FF,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(WATER COST)}",[WATER COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [COIN COST] <> ""
+POLYGON=,{17009/-600}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,-45,#D3212D,#FF01C3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(COIN COST)}",[COIN COST],{169/200}%,0%,{77/6}%,{436/45}%
+endif
+if = [BLOOD] <> ""
+POLYGON=,{24287/600}%,{13123/300}%,{10493/600}%,{2489/180}%,4,0,#D3212D,#990000,0.06
+FONT=JetBrains Mono,15,TF,#FFFFFF,#000000
+TEXT="1-{(BLOOD)}",[BLOOD],{27503/600}%,{20489/450}%,{691/100}%,{388/75}%
+endif
+RECTANGLE=,{-349/75}%,{2507/50}%,{33131/300}%,{23791/450}%,#D3212D,#FFFFFF,0.06
+POLYGON=,{-5021/200}%,{66547/900}%,{6093/100}%,{25357/450}%,6,30,#D3212D,#f7f148,0.06
+FONT=JetBrains Mono,32,T,#000000
+TEXT="1-{(ATTACK)}",[ATTACK],{141/100}%,{19219/225}%,{1703/75}%,{12107/900}%
+POLYGON=,{4813/75}%,{16531/225}%,{6093/100}%,{25357/450}%,6,30,#D3212D,#fa4141,0.06
+TEXT="1-{(HEALTH)}",[HEALTH],{1897/25}%,{76453/900}%,{677/30}%,{12869/900}%
+FONT=JetBrains Mono,15,TF,#000000
+RECTANGLE=,0%,0%,100%,100%,#D3212D,EMPTY,2%
+if = [MATERIAL COST] <> ""
+POLYGON=,{8787/-100}%,{-4487/900}%,{61861/600}%,{62737/900}%,6,0,#D3212D,#FFFFFF,0.06
+HTMLFONT=Material,JetBrains Mono,9,C,#000000
+HTMLTEXT="1-{(MATERIAL COST)}",[MATERIAL COST],{141/200}%,{1919/150}%,{476/75}%,{849/25}%,#FFFFFF,0,T,100,Material,Material
+endif
+POLYGON=,{25303/-300}%,{4031/-50}%,{80141/300}%,{81787/900}%,8,22.5,#D3212D,#FFFFFF,0.06
+TEXT="1-{(Name)}",[Name],{4231/200}%,{203/-180}%,{1421/25}%,{7111/900}%
+HTMLFONT=Desc,JetBrains Mono,8,,#000000,LEFT
+HTMLTEXT="1-{(DESCRIPTION)}",[DESCRIPTION],{11/6}%,{22817/450}%,{14471/150}%,{9793/300}%,#FFFFFF,0,TF,100,Desc
+endif
+
+
+;Structures--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if = [type] = Structure
+RECTANGLE=,0%,0%,{5007/50}%,{45211/900}%,#000000
+IMAGE="1-{(IMAGE)}",[IMAGEURL],0%,{169/450}%,100%,{44957/900}%
+POLYGON=,{37489/600}%,{873/20}%,{40789/600}%,{3196/225}%,6,30,#1974D2,#FFFFFF,0.06
+
+if = [Nature Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#1974D2,#30F129,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(NATURE COST)}",[NATURE COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [BONE] <> ""
+if = [Void Cost] <> ""
+RECTANGLE=,{9069/100}%,{2173/300}%,{1777/200}%,{9313/900}%,#1974D2,#D3D3D3,0.06
+FONT=JetBrains Mono,12,T,#000000,#000000
+TEXT="1-{(BONE)}",[BONE],{18279/200}%,{9821/900}%,{299/40}%,{1919/300}%
+else
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#1974D2,#D3D3D3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(BONE)}",[BONE],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+endif
+if = [Void Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#1974D2,#000000,0.06
+if = - @ [Void Cost]
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{1543/20}%,0%,{6643/300}%,{4741/450}%
+else
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{48913/600}%,{253/-900}%,{5839/300}%,{4741/450}%
+endif
+endif
+
+if = [SHALLOW] <> ""
+RECTANGLE=,{45359/600}%,{111/20}%,{4739/600}%,{6857/900}%,#1974D2,#89CFF0,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(SHALLOW)}",[SHALLOW],{22849/300}%,{491/60}%,{863/120}%,{649/150}%
+endif
+if = [CORAL] <> ""
+RECTANGLE=,{55007/600}%,{9143/900}%,{409/50}%,{649/100}%,#1974D2,#FF9966,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(CORAL)}",[CORAL],{921/10}%,{10583/900}%,{863/120}%,{649/150}%
+endif
+if = [DEEP] <> ""
+RECTANGLE=,{25049/300}%,{3217/450}%,{409/50}%,{7111/900}%,#1974D2,#00308F,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(DEEP)}",[DEEP],{25303/300}%,{9059/900}%,{863/120}%,{649/150}%
+endif
+if = [WATER COST] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#1974D2,#0070FF,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(WATER COST)}",[WATER COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [COIN COST] <> ""
+POLYGON=,{17009/-600}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,-45,#1974D2,#FF01C3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(COIN COST)}",[COIN COST],{169/200}%,0%,{77/6}%,{436/45}%
+endif
+if = [BLOOD] <> ""
+POLYGON=,{24287/600}%,{13123/300}%,{10493/600}%,{2489/180}%,4,0,#1974D2,#990000,0.06
+FONT=JetBrains Mono,15,TF,#FFFFFF,#000000
+TEXT="1-{(BLOOD)}",[BLOOD],{27503/600}%,{20489/450}%,{691/100}%,{388/75}%
+endif
+
+RECTANGLE=,{-349/75}%,{2507/50}%,{33131/300}%,{23791/450}%,#1974D2,#FFFFFF,0.06
+RECTANGLE=,0%,0%,100%,100%,#1974D2,EMPTY,2%
+POLYGON=,{25303/-300}%,{4031/-50}%,{80141/300}%,{81787/900}%,8,22.5,#1974D2,#FFFFFF,0.06
+FONT=JetBrains Mono,15,TF,#000000
+TEXT="1-{(Name)}",[Name],{4231/200}%,{203/-180}%,{1421/25}%,{7111/900}%
+if = [MATERIAL COST] <> ""
+POLYGON=,{8787/-100}%,{-4487/900}%,{61861/600}%,{62737/900}%,6,0,#1974D2,#FFFFFF,0.06
+HTMLFONT=Material,JetBrains Mono,9,C,#000000
+HTMLTEXT="1-{(MATERIAL COST)}",[MATERIAL COST],{141/200}%,{1919/150}%,{476/75}%,{849/25}%,#FFFFFF,0,T,100,Material,Material
+endif
+HTMLFONT=Desc,JetBrains Mono,8,,#000000,LEFT
+HTMLTEXT="1-{(DESCRIPTION)}",[DESCRIPTION],{11/6}%,{22817/450}%,{14471/150}%,45%,#FFFFFF,0,TF,100,Desc
+
+;if = [COUNTDOWN] <> ""
+;POLYGON=,{5303/200}%,{15388/225}%,{1153/25}%,{25357/450}%,5,36,#1974D2,#FFFFFF,0.06
+;FONT=JetBrains Mono,40,T,#000000,#FFFFFF
+;TEXT="1-{(COUNTDOWN)}",[COUNTDOWN],{3653/100}%,{6364/75}%,{3131/120}%,{3323/225}%
+;endif
+endif
+
+
+;Action--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if = [type] = Action
+RECTANGLE=,0%,0%,{5007/50}%,{45211/900}%,#000000
+IMAGE="1-{(IMAGE)}",[IMAGEURL],0%,{169/450}%,100%,{44957/900}%
+POLYGON=,{37489/600}%,{873/20}%,{40789/600}%,{3196/225}%,6,30,#FFF000,#FFFFFF,0.06
+
+if = [Nature Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#FFF000,#30F129,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(NATURE COST)}",[NATURE COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [BONE] <> ""
+if = [Void Cost] <> ""
+RECTANGLE=,{9069/100}%,{2173/300}%,{1777/200}%,{9313/900}%,#FFF000,#D3D3D3,0.06
+FONT=JetBrains Mono,12,T,#000000,#000000
+TEXT="1-{(BONE)}",[BONE],{18279/200}%,{9821/900}%,{299/40}%,{1919/300}%
+else
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#FFF000,#D3D3D3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(BONE)}",[BONE],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+endif
+if = [Void Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#FFF000,#000000,0.06
+if = - @ [Void Cost]
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{1543/20}%,0%,{6643/300}%,{4741/450}%
+else
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{48913/600}%,{253/-900}%,{5839/300}%,{4741/450}%
+endif
+endif
+
+if = [SHALLOW] <> ""
+RECTANGLE=,{45359/600}%,{111/20}%,{4739/600}%,{6857/900}%,#FFF000,#89CFF0,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(SHALLOW)}",[SHALLOW],{22849/300}%,{491/60}%,{863/120}%,{649/150}%
+endif
+if = [CORAL] <> ""
+RECTANGLE=,{55007/600}%,{9143/900}%,{409/50}%,{649/100}%,#FFF000,#FF9966,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(CORAL)}",[CORAL],{921/10}%,{10583/900}%,{863/120}%,{649/150}%
+endif
+if = [DEEP] <> ""
+RECTANGLE=,{25049/300}%,{3217/450}%,{409/50}%,{7111/900}%,#FFF000,#00308F,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(DEEP)}",[DEEP],{25303/300}%,{9059/900}%,{863/120}%,{649/150}%
+endif
+if = [WATER COST] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#FFF000,#0070FF,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(WATER COST)}",[WATER COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [COIN COST] <> ""
+POLYGON=,{17009/-600}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,-45,#FFF000,#FF01C3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(COIN COST)}",[COIN COST],{169/200}%,0%,{77/6}%,{436/45}%
+endif
+if = [BLOOD] <> ""
+POLYGON=,{24287/600}%,{13123/300}%,{10493/600}%,{2489/180}%,4,0,#FFF000,#990000,0.06
+FONT=JetBrains Mono,15,TF,#FFFFFF,#000000
+TEXT="1-{(BLOOD)}",[BLOOD],{27503/600}%,{20489/450}%,{691/100}%,{388/75}%
+endif
+
+RECTANGLE=,{-349/75}%,{2507/50}%,{33131/300}%,{23791/450}%,#FFF000,#FFFFFF,0.06
+RECTANGLE=,0%,0%,100%,100%,#FFF000,EMPTY,2%
+POLYGON=,{25303/-300}%,{4031/-50}%,{80141/300}%,{81787/900}%,8,22.5,#FFF000,#FFFFFF,0.06
+FONT=JetBrains Mono,15,TF,#000000
+TEXT="1-{(Name)}",[Name],{4231/200}%,{203/-180}%,{1421/25}%,{7111/900}%
+if = [MATERIAL COST] <> ""
+POLYGON=,{8787/-100}%,{-4487/900}%,{61861/600}%,{62737/900}%,6,0,#FFF000,#FFFFFF,0.06
+HTMLFONT=Material,JetBrains Mono,9,C,#000000
+HTMLTEXT="1-{(MATERIAL COST)}",[MATERIAL COST],{141/200}%,{1919/150}%,{476/75}%,{849/25}%,#FFFFFF,0,T,100,Material,Material
+endif
+HTMLFONT=Desc,JetBrains Mono,8,,#000000,LEFT
+HTMLTEXT="1-{(DESCRIPTION)}",[DESCRIPTION],{11/6}%,{22817/450}%,{14471/150}%,{9793/300}%,#FFFFFF,0,TF,100,Desc
+POLYGON=,{1777/-100}%,{76199/900}%,{6763/50}%,{5317/90}%,6,30,#FFF000,#FFF000,0.06
+endif
+
+
+;Legends--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if = [type] = Legend
+RECTANGLE=,0%,0%,{5007/50}%,{45211/900}%,#000000
+RECTANGLE=,0%,{2269/45}%,100%,{4967/100}%,#BF00FF,#BF00FF,0.06
+IMAGE="1-{(IMAGE)}",[IMAGEURL],0%,{169/450}%,100%,{44957/900}%
+POLYGON=,{37489/600}%,{873/20}%,{40789/600}%,{3196/225}%,6,30,#BF00FF,#FFFFFF,0.06
+
+POLYGON=,{-5021/200}%,{66547/900}%,{6093/100}%,{25357/450}%,6,30,#BF00FF,#f7f148,0.06
+FONT=JetBrains Mono,32,T,#000000
+TEXT="1-{(ATTACK)}",[ATTACK],{141/100}%,{19219/225}%,{1703/75}%,{12107/900}%
+POLYGON=,{4813/75}%,{16531/225}%,{6093/100}%,{25357/450}%,6,30,#BF00FF,#fa4141,0.06
+TEXT="1-{(HEALTH)}",[HEALTH],{1897/25}%,{76453/900}%,{677/30}%,{12869/900}%
+
+if = [Nature Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#BF00FF,#30F129,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(NATURE COST)}",[NATURE COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [BONE] <> ""
+if = [Void Cost] <> ""
+RECTANGLE=,{9069/100}%,{2173/300}%,{1777/200}%,{9313/900}%,#BF00FF,#D3D3D3,0.06
+FONT=JetBrains Mono,12,T,#000000,#000000
+TEXT="1-{(BONE)}",[BONE],{18279/200}%,{9821/900}%,{299/40}%,{1919/300}%
+else
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#BF00FF,#D3D3D3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(BONE)}",[BONE],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+endif
+if = [Void Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#BF00FF,#000000,0.06
+if = - @ [Void Cost]
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{1543/20}%,0%,{6643/300}%,{4741/450}%
+else
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{48913/600}%,{253/-900}%,{5839/300}%,{4741/450}%
+endif
+endif
+
+if = [SHALLOW] <> ""
+RECTANGLE=,{45359/600}%,{111/20}%,{4739/600}%,{6857/900}%,#BF00FF,#89CFF0,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(SHALLOW)}",[SHALLOW],{22849/300}%,{491/60}%,{863/120}%,{649/150}%
+endif
+if = [CORAL] <> ""
+RECTANGLE=,{55007/600}%,{9143/900}%,{409/50}%,{649/100}%,#BF00FF,#FF9966,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(CORAL)}",[CORAL],{921/10}%,{10583/900}%,{863/120}%,{649/150}%
+endif
+if = [DEEP] <> ""
+RECTANGLE=,{25049/300}%,{3217/450}%,{409/50}%,{7111/900}%,#BF00FF,#00308F,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(DEEP)}",[DEEP],{25303/300}%,{9059/900}%,{863/120}%,{649/150}%
+endif
+if = [WATER COST] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#BF00FF,#0070FF,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(WATER COST)}",[WATER COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [COIN COST] <> ""
+POLYGON=,{17009/-600}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,-45,#BF00FF,#FF01C3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(COIN COST)}",[COIN COST],{169/200}%,0%,{77/6}%,{436/45}%
+endif
+if = [BLOOD] <> ""
+POLYGON=,{24287/600}%,{13123/300}%,{10493/600}%,{2489/180}%,4,0,#BF00FF,#990000,0.06
+FONT=JetBrains Mono,15,TF,#FFFFFF,#000000
+TEXT="1-{(BLOOD)}",[BLOOD],{27503/600}%,{20489/450}%,{691/100}%,{388/75}%
+endif
+RECTANGLE=,0%,0%,100%,100%,#BF00FF,EMPTY,2%
+if = [MATERIAL COST] <> ""
+POLYGON=,{8787/-100}%,{-4487/900}%,{61861/600}%,{62737/900}%,6,0,#BF00FF,#FFFFFF,0.06
+HTMLFONT=Material,JetBrains Mono,9,C,#000000
+HTMLTEXT="1-{(MATERIAL COST)}",[MATERIAL COST],{141/200}%,{1919/150}%,{476/75}%,{849/25}%,#FFFFFF,0,T,100,Material,Material
+endif
+RECTANGLE=,0%,{11324/225}%,{5007/50}%,{6079/90+1507/90-11324/225}%,#BF00FF,#FFFFFF,2%
+POLYGON=,{25303/-300}%,{4031/-50}%,{80141/300}%,{81787/900}%,8,22.5,#BF00FF,#FFFFFF,0.06
+FONT=JetBrains Mono,15,TF,#000000
+TEXT="1-{(Name)}",[Name],{4231/200}%,{203/-180}%,{1421/25}%,{7111/900}%
+HTMLFONT=Desc,JetBrains Mono,8,,#000000,LEFT
+RECTANGLE=,0%,{6079/90}%,100%,{1507/90}%,#BF00FF,EMPTY,0.06
+HTMLTEXT="1-{(DESCRIPTION)}",[DESCRIPTION],{677/600}%,{22817/450}%,{5873/60}%,{4967/300}%,#FFFFFF,0,F,100,Desc
+HTMLTEXT="1-{(ABILITIES)}",[ABILITIES],{677/600}%,{2063/30}%,{3921/40}%,{46/3}%,#FFFFFF,0,F,100,Desc
+FONT=JetBrains Mono,35,T,#000000,#FFFFFF
+TEXT=,"3",{7489/300}%,{16933/225}%,{1287/25}%,{14647/450}%
+endif
+
+
+;Prophecy--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if = [type] = Prophecy
+
+RECTANGLE=1,0%,0%,{5007/50}%,{45211/900}%,#000000
+IMAGE="1-{(IMAGE)}",[IMAGEURL],0%,{169/450}%,100%,{44957/900}%
+POLYGON=,{37489/600}%,{873/20}%,{40789/600}%,{3196/225}%,6,30,#ED872D,#FFFFFF,0.06
+
+if = [Nature Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#ED872D,#30F129,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(NATURE COST)}",[NATURE COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [BONE] <> ""
+if = [Void Cost] <> ""
+RECTANGLE=,{9069/100}%,{2173/300}%,{1777/200}%,{9313/900}%,#ED872D,#D3D3D3,0.06
+FONT=JetBrains Mono,12,T,#000000,#000000
+TEXT="1-{(BONE)}",[BONE],{18279/200}%,{9821/900}%,{299/40}%,{1919/300}%
+else
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#ED872D,#D3D3D3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(BONE)}",[BONE],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+endif
+if = [Void Cost] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#ED872D,#000000,0.06
+if = - @ [Void Cost]
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{1543/20}%,0%,{6643/300}%,{4741/450}%
+else
+FONT=JetBrains Mono,21,T,#FFFFFF,#000000
+TEXT="1-{(VOID COST)}",[VOID COST],{48913/600}%,{253/-900}%,{5839/300}%,{4741/450}%
+endif
+endif
+
+if = [SHALLOW] <> ""
+RECTANGLE=,{45359/600}%,{111/20}%,{4739/600}%,{6857/900}%,#ED872D,#89CFF0,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(SHALLOW)}",[SHALLOW],{22849/300}%,{491/60}%,{863/120}%,{649/150}%
+endif
+if = [CORAL] <> ""
+RECTANGLE=,{55007/600}%,{9143/900}%,{409/50}%,{649/100}%,#ED872D,#FF9966,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(CORAL)}",[CORAL],{921/10}%,{10583/900}%,{863/120}%,{649/150}%
+endif
+if = [DEEP] <> ""
+RECTANGLE=,{25049/300}%,{3217/450}%,{409/50}%,{7111/900}%,#ED872D,#00308F,0.06
+FONT=JetBrains Mono,12,T,#FFFFFF,#000000
+TEXT="1-{(DEEP)}",[DEEP],{25303/300}%,{9059/900}%,{863/120}%,{649/150}%
+endif
+if = [WATER COST] <> ""
+POLYGON=,{7921/120}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,45,#ED872D,#0070FF,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(WATER COST)}",[WATER COST],{6421/75}%,{253/900}%,{8293/600}%,{4487/450}%
+endif
+
+if = [COIN COST] <> ""
+POLYGON=,{17009/-600}%,{32173/-900}%,{6093/100}%,{25357/450}%,6,-45,#ED872D,#FF01C3,0.06
+FONT=JetBrains Mono,25,T,#000000,#FFFFFF
+TEXT="1-{(COIN COST)}",[COIN COST],{169/200}%,0%,{77/6}%,{436/45}%
+endif
+if = [BLOOD] <> ""
+POLYGON=,{24287/600}%,{13123/300}%,{10493/600}%,{2489/180}%,4,0,#ED872D,#990000,0.06
+FONT=JetBrains Mono,15,TF,#FFFFFF,#000000
+TEXT="1-{(BLOOD)}",[BLOOD],{27503/600}%,{20489/450}%,{691/100}%,{388/75}%
+endif
+RECTANGLE=,{-349/75}%,{2507/50}%,{33131/300}%,{23791/450}%,#ED872D,#FFFFFF,0.06
+RECTANGLE=,{-3923/600}%,{24443/300}%,{33131/300}%,{23791/450}%,#ED872D,#FFFFFF,0.3
+RECTANGLE=,0%,0%,100%,100%,#ED872D,EMPTY,2%
+if = [MATERIAL COST] <> ""
+POLYGON=,{8787/-100}%,{-4487/900}%,{61861/600}%,{62737/900}%,6,0,#ED872D,#FFFFFF,0.06
+HTMLFONT=Material,JetBrains Mono,9,C,#000000
+HTMLTEXT="1-{(MATERIAL COST)}",[MATERIAL COST],{141/200}%,{1919/150}%,{476/75}%,{849/25}%,#FFFFFF,0,T,100,Material,Material
+endif
+
+POLYGON=,{25303/-300}%,{4031/-50}%,{80141/300}%,{81787/900}%,8,22.5,#ED872D,#FFFFFF,0.06
+FONT=JetBrains Mono,15,TF,#000000
+TEXT="1-{(Name)}",[Name],{4231/200}%,{203/-180}%,{1421/25}%,{7111/900}%
+HTMLFONT=Desc,JetBrains Mono,8,,#000000,LEFT
+HTMLTEXT="1-{(DESCRIPTION)}",[DESCRIPTION],{11/6}%,{3817/75}%,{14471/150}%,{25823/900}%,#FFFFFF,0,TF,100,Desc
+HTMLTEXT="1-{(ABILITIES)}",[ABILITIES],{11/6}%,{25061/300}%,{14471/150}%,{46/3}%,#FFFFFF,0,TF,100,Desc
+endif
+
+
+;Universal--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+if = [Speed] = "Standard"
+IMAGE=,"https://drive.google.com/thumbnail?id=1CwRxwSKvHCOhcdJT_yL2nJW0ZDw5GFNy&sz=w400",{54349/600}%,{38507/900}%,{2581/300}%,{436/45}%
+elseif  = [Speed] = "Slow"
+IMAGE=,"https://drive.google.com/thumbnail?id=1IoN0wBj6nc__R-5m2MtzoV91nCTuRdTz&sz=w400",{13489/150}%,{40759/900}%,{2031/200}%,{1037/225}%
+elseif  = [Speed] = "Fast"
+IMAGE=,"https://drive.google.com/thumbnail?id=1Oubx3JGD0GZLyzzFbPwfqx5j9sKJ8Oo4&sz=w400",{8987/100}%,{13699/300}%,{5839/600}%,{79/20}%
+elseif  = [Speed] = "Instant"
+IMAGE=,"https://drive.google.com/thumbnail?id=1rmlXnYDFKsq1JlsS5bsxhRoR91z4IY6W&sz=w400",{18161/200}%,{40963/900}%,{409/50}%,{3809/900}%
+endif
+
+
+
+
+
+
+
+
+
+Display = "tts_Deck.png",,,10
