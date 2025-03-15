@@ -127,7 +127,8 @@ export default function Home() {
     <main>
       <Title>ranDECK</Title>
       <h1>ranDECK</h1>
-      <Show when={(rows()?.length ?? 0) > 0 && (rows()?.length ?? 0) > 0} fallback={<p>Loading...</p>}>
+      <Show when={(code()?.length ?? 0) > 0 && (rows()?.length ?? 0) > 0} fallback={<p>Loading...</p>}>
+        <div>{JSON.stringify(code())}</div>
         <div>Code File <input type="file" value="" onInput={(e) => updateCode()}/></div>
         <div>Deck Name <input type="text" value={deckName()} onInput={(e) => setDeckName((e.target as HTMLInputElement).value)}/></div>
         <div>Count {countIndex()} <input type="number" value={countIndex()} onInput={(e) => setCountIndex(parseInt((e.target as HTMLInputElement).value))}/></div>

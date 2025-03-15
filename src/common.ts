@@ -10,5 +10,6 @@ export function parseFileContents(fileContents: string) {
 }
 
 export function split_at_index(value: string, index: number) {
+  if(index === -1) return [value];
   return [value.slice(0, index), (value.slice(index+1))];
 }
