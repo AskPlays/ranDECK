@@ -8,7 +8,7 @@ Unit = CM
 ;Icons
 htmlimage = , (Wood), "https://drive.google.com/thumbnail?id=1pmcluJuk8wZNhs8oyjJ26VEAt_4QAgTH&sz=w800", 0.3, 0.3, P
 htmlimage = , (Iron), "https://drive.google.com/thumbnail?id=1vaSnN_7Ca3mxtkGh_5LuQnuLlgAbrPBY&sz=w800", 0.3, 0.3, P
-htmlimage = , (Fiber), "https://drive.google.com/thumbnail?id=1EHyPe828R2odaE90mvKLb-5mHwkQqKdm&sz=w800", 0.3, 0.3, P
+htmlimage = , (Fabric), "https://drive.google.com/thumbnail?id=1EHyPe828R2odaE90mvKLb-5mHwkQqKdm&sz=w800", 0.3, 0.3, P
 htmlimage = , (Marble), "https://drive.google.com/thumbnail?id=1zubSfKkTp1x_-SvQWZwTftn9BHxwf2PP&sz=w800", 0.3, 0.3, P
 htmlimage = , (TempCoins), "https://drive.google.com/thumbnail?id=1AB5213CPJyDR3ak1OzeGjXfF6GUvGm1m&sz=w800", 0.3, 0.3, P
 htmlimage = , (Tap), "https://drive.google.com/thumbnail?id=1riTIeNWKasGuBNzKxzhskkB6wFmWdJg0&sz=w256", 0.3, 0.3, P

@@ -40,6 +40,7 @@ export default function Home() {
   const [renderState, setRenderState] = createSignal("");
   const [deckName, setDeckName] = createSignal("Deck");
   const [download, setDownload] = createSignal(false);
+  const [startTime, setStartTime] = createSignal(0);
 
   onMount(() => {
     setContainer(document.createElement("div"));
@@ -66,12 +67,13 @@ export default function Home() {
     //setTimeout(() => {domToPng(document.getElementById("cards") as HTMLElement, {scale: 1, fetch:{requestInit: {mode: 'no-cors'}}}).then(function (dataUrl: string) {
     output()!.innerHTML = "";
     setRenderState("Rendering");
+    setStartTime(Date.now());
     setTimeout(() => {toPng(document.getElementById("cards") as HTMLElement, {pixelRatio: 1, includeQueryParams: true}).then(function (dataUrl: string) {
       setDataUrl(dataUrl);
       var img = new Image();
       img.src = dataUrl;
       document.getElementById("output")?.appendChild(img);
-      setRenderState("Rendered");
+      setRenderState("Rendered in " + (Date.now()-startTime()) + "ms");
       serverSaveDeck(dataUrl, deckName());
       if(download()) {
         const link = document.createElement("a");
@@ -81,7 +83,7 @@ export default function Home() {
       }
     }).catch(function (error: any) {
       console.error(error);
-    })}, 1000);
+    })}, 0);
     const rowsRef = rows();
     const codeRef = code();
     if(!rowsRef || !codeRef) return;
