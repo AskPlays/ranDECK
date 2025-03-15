@@ -1,10 +1,11 @@
 import { Title } from "@solidjs/meta";
 
-import { getRows, parseFile, saveDeck, uploadDeck } from "../server";
+import { getRows, parseFile, saveDeck, uploadDeck, waitForCode } from "../server";
 import { createSignal, onMount, Show } from "solid-js";
+import { clientOnly } from "@solidjs/start";
 import { toPng } from 'html-to-image';
 import './index.css';
-import { parseFileContents } from "~/common";
+import { AST, parseFileContents } from "~/common";
 
 const serverGetRows = async () => {
   "use server";
@@ -26,6 +27,18 @@ const serverSaveDeck = async (dataUrl: string, deckName: string) => {
   return saveDeck(dataUrl, deckName);
 }
 
+// export function updateCode(code: {key: string, value: string[]}[]) {
+//   clientOnly(() => {
+//     console.log("server update code", code);
+//     setCode(code);
+//   });
+// }
+const serverWaitForCode = async () => {
+  "use server";
+  const ast = await waitForCode()
+  return ast;
+}
+
 const [header, setHeader] = createSignal<string[]>([]);
 const [headerMap, setHeaderMap] = createSignal<{[key: string]: number}>({});
 
@@ -33,7 +46,7 @@ export default function Home() {
   const [rows, setRows] = createSignal<any[][] | null>(null);
   const [container, setContainer] = createSignal<HTMLElement | null>(null);
   const [output, setOutput] = createSignal<HTMLElement | null>(null);
-  const [code, setCode] = createSignal<{key: string, value: string[]}[]>([]);
+  const [code, setCode] = createSignal<AST>([]);
   const [deckUrl, setDeckUrl] = createSignal<string | null>(null);
   const [dataUrl, setDataUrl] = createSignal<string | null>(null);
   const [countIndex, setCountIndex] = createSignal(1);
@@ -61,6 +74,13 @@ export default function Home() {
     Promise.all([rowPromise, filePromise]).then(() => {
       render();
     });
+    setTimeout(async () => {
+      while(true) {
+        setCode(await serverWaitForCode());
+        console.log("code updated");
+        render();
+      }
+    }, 100);
   });
 
   const render = async () => {
