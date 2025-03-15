@@ -1,9 +1,8 @@
 import { Title } from "@solidjs/meta";
 
 import { getRows, parseFile, saveDeck, uploadDeck } from "../server";
-import { createEffect, createResource, createSignal, For, onMount, Show, Suspense } from "solid-js";
-import { createAsync, query } from "@solidjs/router";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import { createSignal, onMount, Show } from "solid-js";
+import { toPng } from 'html-to-image';
 import './index.css';
 import { parseFileContents } from "~/common";
 
@@ -37,7 +36,6 @@ export default function Home() {
   const [code, setCode] = createSignal<{key: string, value: string[]}[]>([]);
   const [deckUrl, setDeckUrl] = createSignal<string | null>(null);
   const [dataUrl, setDataUrl] = createSignal<string | null>(null);
-  const [cards, setCards] = createSignal<any[][] | null>(null);
   const [countIndex, setCountIndex] = createSignal(1);
   const [renderState, setRenderState] = createSignal("");
   const [deckName, setDeckName] = createSignal("Deck");
@@ -140,12 +138,6 @@ export default function Home() {
         <Show when={deckUrl() !== null}> Deck: <a href={deckUrl() ?? ""}>{deckUrl()}</a></Show>
         { container() }
         { output() }
-        {/* <Suspense fallback={<div>Loading...</div>}><div id="cards">
-          <For each={rows()?.filter(row => row[18]>0)}>{(row, i) => 
-            // <div class={row[2]}>{row[0]}<br/> {row[3]}<br/>{row[4]},{row[5]},{row[6]},{row[7]},{row[8]},{row[9]}<br/><div innerHTML={row[14]}></div><br/><div innerHTML={row[15]}></div><br/>{row[16]} / {row[17]}</div>
-            parseCode(code() ?? [], row)
-          }</For>
-        </div></Suspense> */}
       </Show>
     </main>
   );
