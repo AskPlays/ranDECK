@@ -4,21 +4,18 @@ A card deck generator and renderer built with SolidJS. Created to be used with "
 
 ## Getting Started
 
+run the `install.bat` file to install all dependencies and start the projecto or follow the instructions below.
 ```bash
-# create a new project in the current directory
 npm install
 cd proxy
 npm install
 ```
 
 ## Running the Project
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+Once you've installed the dependencies, you can run the project with `start.bat` or the following commands:
 ```bash
 npm run dev
-
-# in the proxy directory
+# start a new cmd window
 cd proxy
 npm start
 ```
