@@ -89,7 +89,7 @@ export default function Home() {
     if(!rowsRef || !codeRef) return;
     container()!.innerHTML = "";
     for(const row of rowsRef) {
-      const copies = row[17+countIndex()];
+      const copies = row[headerMap()["count"]-1+countIndex()];
       if(copies > 0) {
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
@@ -164,6 +164,7 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
   let fontColor = "#000000";
   let fontAlign = "center";
   let htmlFont = {fontFamily: "JetBrains Mono", fontSize: "12", fontFlag: "T", fontColor: "#000000", fontAlign: "center"};
+  let borderWidth = 0;
 
   // console.log(row);
 
@@ -206,16 +207,17 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         break;
       case "rectangle":
         const rect = document.createElement("div");
+        if(parseUnit(value[7]).endsWith("%")) borderWidth = parsePercentage(parseUnit(value[7]))*710;
+        else borderWidth = unitToPx(parseUnit(value[7]));
         rect.style.position = "absolute";
-        rect.style.left = parseUnit(value[1]);
-        rect.style.top = parseUnit(value[2]);
-        rect.style.width = parseUnit(value[3]);
-        rect.style.height = parseUnit(value[4]);
+        rect.style.left = parsePercentage(parseUnit(value[1]))*710-borderWidth/2+"px";
+        rect.style.top = parsePercentage(parseUnit(value[2]))*1065-borderWidth/2+"px";
+        rect.style.width = parsePercentage(parseUnit(value[3]))*710+borderWidth+"px";
+        rect.style.height = parsePercentage(parseUnit(value[4]))*1065+borderWidth+"px";
         rect.style.borderColor = value[5];
         rect.style.backgroundColor = value[6];
         if(value[6] == "empty") rect.style.backgroundColor = "transparent";
-        if(parseUnit(value[7]).endsWith("%")) rect.style.borderWidth = parsePercentage(parseUnit(value[7]))*710/2+"px";
-        else rect.style.borderWidth = cmToPx(parseUnit(value[7]))+"px";
+        rect.style.borderWidth = borderWidth+"px";
         rect.style.borderStyle = 'solid';
         card.appendChild(rect);
         break;
@@ -276,7 +278,7 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         poly.setAttribute("points", points);
         poly.style.stroke = value[7];
         poly.style.fill = value[8];
-        poly.style.strokeWidth = cmToPx(parseUnit(value[9]))+"px";
+        poly.style.strokeWidth = unitToPx(parseUnit(value[9]))+"px";
         svg.appendChild(poly);
         card.appendChild(svg);
         break;
@@ -291,7 +293,7 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
           const image = images[c];
           if(!image) return c;
           if(image.url.startsWith("C:")) return c;
-          return `<img src="${toLocalUrl(image.url)}" width="${cmToPx(image.width)}" height="${cmToPx(image.height)}" style="vertical-align:middle;${image.flags}">`;
+          return `<img src="${toLocalUrl(image.url)}" width="${unitToPx(image.width)}" height="${unitToPx(image.height)}" style="vertical-align:middle;${image.flags}">`;
         });
         html.style.left = parseUnit(value[2]);
         html.style.top = parseUnit(value[3]);
@@ -361,8 +363,10 @@ const parsePercentage = (value: string) => {
   return parseFloat(value)/100;
 }
 
-const cmToPx = (value: string | number) => {
+const unitToPx = (value: string | number) => {
   if(typeof value === 'number') return value/6*710;
+  if(value == "") return 0;
+  if(value.endsWith("%")) return parsePercentage(value)*710;
   return parseFloat(value)/6*710;
 }
 
