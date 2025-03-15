@@ -316,6 +316,23 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         img.style.height = parseUnit(value[5]);
         card.appendChild(img);
         break;
+      case "roundrect":
+        const roundRect = document.createElement("div");
+        if(parseUnit(value[7]).endsWith("%")) borderWidth = parsePercentage(parseUnit(value[7]))*710;
+        else borderWidth = unitToPx(parseUnit(value[7]));
+        roundRect.style.position = "absolute";
+        roundRect.style.left = parsePercentage(parseUnit(value[1]))*710-borderWidth/2+"px";
+        roundRect.style.top = parsePercentage(parseUnit(value[2]))*1065-borderWidth/2+"px";
+        roundRect.style.width = parsePercentage(parseUnit(value[3]))*710+borderWidth+"px";
+        roundRect.style.height = parsePercentage(parseUnit(value[4]))*1065+borderWidth+"px";
+        roundRect.style.borderColor = value[5];
+        roundRect.style.backgroundColor = value[6];
+        if(value[6] == "empty") roundRect.style.backgroundColor = "transparent";
+        roundRect.style.borderWidth = borderWidth+"px";
+        roundRect.style.borderStyle = 'solid';
+        roundRect.style.borderRadius = "40px";//parseUnit(value[8])+"";
+        card.appendChild(roundRect);
+        break;
     }
   }
 
