@@ -1,6 +1,6 @@
 import { Title } from "@solidjs/meta";
 
-import { getRows, parseFile, saveDeck, uploadDeck, waitForCode } from "../server";
+import { getRows, parseFile, saveDeck, uploadDeck, uploadImage, waitForCode } from "../server";
 import { createSignal, onMount, Show } from "solid-js";
 import { clientOnly } from "@solidjs/start";
 import { toPng } from 'html-to-image';
@@ -15,6 +15,11 @@ const serverGetRows = async () => {
 const serverUploadDeck = async (dataUrl: string, deckName: string) => {
   "use server";
   return uploadDeck(dataUrl, deckName);
+}
+
+const serverUploadImage = async (dataUrl: string, imageName: string) => {
+  "use server";
+  return uploadImage(dataUrl, imageName);
 }
 
 const serverParseFile = async (filePath: string) => {
@@ -54,6 +59,7 @@ export default function Home() {
   const [deckName, setDeckName] = createSignal("Deck");
   const [download, setDownload] = createSignal(false);
   const [startTime, setStartTime] = createSignal(0);
+  const [uploadedImageUrl, setUploadedImageUrl] = createSignal<string | null>(null);
 
   onMount(() => {
     setContainer(document.createElement("div"));
@@ -143,12 +149,30 @@ export default function Home() {
     reader.readAsText(file);
   }
 
+  const uploadImage = () => {
+    const file = (document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>)[1].files?.[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const contents = e.target?.result as string;
+      serverUploadImage(contents, file.name).then((id) => {
+        if(id && typeof id === 'string') {
+          console.log("uploaded image with id: " + id);
+          setUploadedImageUrl("https://drive.google.com/thumbnail?id=" + id + "&sz=w710");
+        }
+      });
+    }
+    reader.readAsDataURL(file);
+  }
+
   return (
     <main>
       <Title>ranDECK</Title>
       <h1>ranDECK</h1>
       <Show when={(code()?.length ?? 0) > 0 && (rows()?.length ?? 0) > 0} fallback={<p>Loading...</p>}>
         <div>Code File <input type="file" value="" onInput={(e) => updateCode()}/></div>
+        <div>Image File <input type="file" value="" onInput={(e) => uploadImage()}/></div>
+        <Show when={uploadedImageUrl() !== null}> Uploaded Image: <input type="text" value={uploadedImageUrl() ?? ""}/></Show>
         <div>Deck Name <input type="text" value={deckName()} onInput={(e) => setDeckName((e.target as HTMLInputElement).value)}/></div>
         <div>Count {countIndex()} <input type="number" value={countIndex()} onInput={(e) => setCountIndex(parseInt((e.target as HTMLInputElement).value))}/></div>
         <div>Download After Render <input type="checkbox" value={download()+""} onInput={(e) => setDownload((e.target as HTMLInputElement).checked)}/></div>

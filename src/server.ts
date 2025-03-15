@@ -78,17 +78,6 @@ export async function saveDeck(dataUrl: string, deckName: string) {
   await fs.writeFile(filePath, Buffer.from(dataUrl.split(",")[1], 'base64'));
 }
 
-
-// watch(path.resolve('Deck.txt'), (eventType, filename) => {
-//   console.log(eventType, filename);
-//   if(eventType === 'change' && filename) {
-//     parseFile(filename).
-//     then((ast) => {
-//       updateCode(ast);
-//     });
-//   }
-// });
-
 export async function waitForCode(): Promise<AST> {
   return new Promise((resolve) => {
     watch(path.resolve('Deck.txt'), (eventType, filename) => {
@@ -101,6 +90,27 @@ export async function waitForCode(): Promise<AST> {
       }
     });
   });
+}
+
+export async function uploadImage(dataUrl: string, imageName: string) {
+  const res = await drive.files.create({
+    requestBody: {
+      name: imageName,
+      mimeType: 'image/png',
+      parents: ['1fqdIBUvK_lGFDLhtKC_nKLbTfjbXsIJH']
+    },
+    media: {
+      mimeType: 'image/png',
+      body: new stream.PassThrough().end(Buffer.from(dataUrl.split(",")[1], 'base64'))
+    }
+  }).catch((err) => {
+    console.log(err);
+  });
+  if(res) {
+    console.log(res.data);
+    return res.data.id;
+  }
+  return null;
 }
 
 /*const resImages = await drive.files.list({
