@@ -242,7 +242,6 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         pageName = deckLocation[1];
         break;
       case "htmlimage":
-        console.log("image "+value[1].replace(/^\((.*)\)$/, "$1"))
         images[value[1].replace(/^\((.*)\)$/, "$1")] = {url: parseString(value[2]), width: parseFloat(value[3]), height: parseFloat(value[4]), flags: value[5]};
         break;
       case "rectangle":
@@ -254,9 +253,9 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         rect.style.top = parsePercentage(parseUnit(value[2]))*1065-borderWidth/2+"px";
         rect.style.width = parsePercentage(parseUnit(value[3]))*710+borderWidth+"px";
         rect.style.height = parsePercentage(parseUnit(value[4]))*1065+borderWidth+"px";
-        rect.style.borderColor = value[5];
-        rect.style.backgroundColor = value[6];
-        if(value[6] == "empty") rect.style.backgroundColor = "transparent";
+        rect.style.borderColor = parseColor(value[5]);
+        rect.style.backgroundColor = parseColor(value[6]);
+        // if(value[6] == "empty") rect.style.backgroundColor = "transparent";
         rect.style.borderWidth = borderWidth+"px";
         rect.style.borderStyle = 'solid';
         card.appendChild(rect);
@@ -316,8 +315,8 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
           points += (Math.cos(angle + i * 2 * Math.PI / sides) + 1) * scale/2 + "," + (Math.sin(angle + i * 2 * Math.PI / sides) + 1) * scale/2 + " ";
         }
         poly.setAttribute("points", points);
-        poly.style.stroke = value[7];
-        poly.style.fill = value[8];
+        poly.style.stroke = parseColor(value[7]);
+        poly.style.fill = parseColor(value[8]);
         poly.style.strokeWidth = unitToPx(parseUnit(value[9]))+"px";
         svg.appendChild(poly);
         card.appendChild(svg);
@@ -330,7 +329,6 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         html.style.fontSize = parseInt(htmlFont.fontSize)*3.2+"pt";
         html.style.color = htmlFont.fontColor;
         html.innerHTML = parseValue(value[1], row).replace(/\((.*?)\s*(\d*)\)/g, (c, c1, c2) => {
-          console.log(c, c1, c2);
           const image = images[c1];
           if(!image) return c;
           if(image.url.startsWith("C:")) return c;
@@ -367,9 +365,8 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         roundRect.style.top = parsePercentage(parseUnit(value[2]))*1065-borderWidth/2+"px";
         roundRect.style.width = parsePercentage(parseUnit(value[3]))*710+borderWidth+"px";
         roundRect.style.height = parsePercentage(parseUnit(value[4]))*1065+borderWidth+"px";
-        roundRect.style.borderColor = value[5];
-        roundRect.style.backgroundColor = value[6];
-        if(value[6] == "empty") roundRect.style.backgroundColor = "transparent";
+        roundRect.style.borderColor = parseColor(value[5]);
+        roundRect.style.backgroundColor = parseColor(value[6]);
         roundRect.style.borderWidth = borderWidth+"px";
         roundRect.style.borderStyle = 'solid';
         roundRect.style.borderRadius = "40px";//parseUnit(value[8])+"";
@@ -422,6 +419,11 @@ const parsePercentage = (value: string) => {
   return parseFloat(value)/100;
 }
 
+const parseColor = (value: string) => {
+  if(!value) return "";
+  return value.trim().toLowerCase().replace("empty", "transparent");
+}
+
 const unitToPx = (value: string | number) => {
   if(typeof value === 'number') return value/6*710;
   if(value == "") return 0;
@@ -441,9 +443,14 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   text.style.position = "absolute";
   text.style.visibility = "hidden";
   document.body.appendChild(text);
-  const widthRatio = parsePercentage(width)*710/text.getBoundingClientRect().width;
-  const heightRatio = parsePercentage(height)*1065/text.getBoundingClientRect().height;
-  const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
+  // const widthRatio = parsePercentage(width)*710/text.getBoundingClientRect().width;
+  // const heightRatio = parsePercentage(height)*1065/text.getBoundingClientRect().height;
+  // const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
+  let ratio = 1;
+  while(text.getBoundingClientRect().width > parsePercentage(width)*710 || text.getBoundingClientRect().height > parsePercentage(height)*1065) {
+    ratio -= 0.01;
+    text.style.fontSize = Math.floor(parseFloat(fontSize)*ratio)+"pt";
+  }
   document.body.removeChild(text);
   /* canvas calculation 
   const [textWidth, textHeight] = getTextWidth(elem.innerText, `${600} ${fontSize} ${elem.style.fontFamily}`);
