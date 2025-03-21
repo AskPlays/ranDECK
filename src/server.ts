@@ -23,7 +23,7 @@ export { sheets, drive };
 export async function getRows() {
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: '1mWUGI2zzvp_bSTw6kE5K68mHg2SzoRiT9zgaMc7qE3I',
-    range: 'Deck!A1:V',
+    range: 'Deck',
   });
   const rows = res.data.values;
   if (!rows || rows.length === 0) {

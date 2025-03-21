@@ -114,8 +114,10 @@ export default function Home() {
     const codeRef = code();
     if(!rowsRef || !codeRef) return;
     container()!.innerHTML = "";
+    console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
     for(const row of rowsRef) {
       const copies = row[headerMap()["count"]-1+countIndex()];
+      console.log(copies);
       if(copies > 0) {
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
