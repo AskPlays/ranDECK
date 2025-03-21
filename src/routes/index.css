@@ -29,22 +29,19 @@ body {
   overflow: hidden;
 }
 
-.Unit {
-  background-color: red;
+.image-text {
+  position: relative;
+  display: inline-block;
 }
 
-.Structure {
-  background-color: blue;
-}
-
-.Action {
-  background-color: yellow;
-}
-
-.Legend {
-  background-color: purple;
-}
-
-.Prophecy {
-  background-color: orange;
+.image-text span {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }

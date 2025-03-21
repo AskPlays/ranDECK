@@ -117,7 +117,6 @@ export default function Home() {
     console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
     for(const row of rowsRef) {
       const copies = row[headerMap()["count"]-1+countIndex()];
-      console.log(copies);
       if(copies > 0) {
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
@@ -243,7 +242,8 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         pageName = deckLocation[1];
         break;
       case "htmlimage":
-        images[value[1]] = {url: parseString(value[2]), width: parseFloat(value[3]), height: parseFloat(value[4]), flags: value[5]};
+        console.log("image "+value[1].replace(/^\((.*)\)$/, "$1"))
+        images[value[1].replace(/^\((.*)\)$/, "$1")] = {url: parseString(value[2]), width: parseFloat(value[3]), height: parseFloat(value[4]), flags: value[5]};
         break;
       case "rectangle":
         const rect = document.createElement("div");
@@ -329,11 +329,13 @@ const parseCode = (code: { key: string, value: string[]}[], row: string[]) => {
         html.style.fontFamily = htmlFont.fontFamily;
         html.style.fontSize = parseInt(htmlFont.fontSize)*3.2+"pt";
         html.style.color = htmlFont.fontColor;
-        html.innerHTML = parseValue(value[1], row).replace(/\((.*?)\)/g, (c) => {
-          const image = images[c];
+        html.innerHTML = parseValue(value[1], row).replace(/\((.*?)\s*(\d*)\)/g, (c, c1, c2) => {
+          console.log(c, c1, c2);
+          const image = images[c1];
           if(!image) return c;
           if(image.url.startsWith("C:")) return c;
-          return `<img src="${toLocalUrl(image.url)}" width="${unitToPx(image.width)}" height="${unitToPx(image.height)}" style="vertical-align:middle;${image.flags}">`;
+          if(image.flags.includes("G")) return `<span class="image-text"><img src="${toLocalUrl(image.url)}" width="${unitToPx(image.width)}" height="${unitToPx(image.height)}" style="vertical-align:middle;${image.flags}"><span>${c2}</span></span>`;
+          else return `<img src="${toLocalUrl(image.url)}" width="${unitToPx(image.width)}" height="${unitToPx(image.height)}" style="vertical-align:middle;${image.flags}">`;
         });
         html.style.left = parseUnit(value[2]);
         html.style.top = parseUnit(value[3]);
