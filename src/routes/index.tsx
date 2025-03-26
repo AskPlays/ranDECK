@@ -80,13 +80,13 @@ export default function Home() {
     Promise.all([rowPromise, filePromise]).then(() => {
       render();
     });
-    setTimeout(async () => {
-      while(true) {
-        setCode(await serverWaitForCode());
-        console.log("code updated");
-        render();
-      }
-    }, 100);
+    // setTimeout(async () => {
+    //   while(true) {
+    //     setCode(await serverWaitForCode());
+    //     console.log("code updated");
+    //     render();
+    //   }
+    // }, 100);
   });
 
   const render = async () => {
