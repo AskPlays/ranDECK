@@ -1,3 +1,4 @@
+"use strict";
 import { Title } from "@solidjs/meta";
 
 import { getRows, parseFile, saveDeck, uploadDeck, uploadImage, waitForCode } from "../server";
@@ -461,6 +462,7 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   // const heightRatio = parsePercentage(height)*1065/text.getBoundingClientRect().height;
   // const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
   let ratio = 1;
+  console.log(text.getBoundingClientRect().width, parsePercentage(width)*710, text.getBoundingClientRect().height, parsePercentage(height)*1065);
   while((text.getBoundingClientRect().width > parsePercentage(width)*710 || text.getBoundingClientRect().height > parsePercentage(height)*1065) && ratio > 0.01) {
     ratio -= 0.01;
     text.style.fontSize = Math.floor(parseFloat(fontSize)*ratio)+"pt";
@@ -471,6 +473,17 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   const widthRatio = parsePercentage(width)*710/textWidth;
   const heightRatio = parsePercentage(height)*1065/textHeight;
   const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
+  */
+  /*
+  const elt = document.createElement("span");
+  elt.innerText = "test"
+  document.body.appendChild(elt);
+  elt.style.fontSize = 100 + "px";
+  const size1 = elt.getBoundingClientRect();
+  elt.style.fontSize = 10 + "px";
+  const size2 = elt.getBoundingClientRect();
+  console.log(size1, size2);
+  document.body.removeChild(elt);
   */
   return Math.floor(parseFloat(fontSize)*ratio)+"pt";
 }
