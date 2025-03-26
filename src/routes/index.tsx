@@ -126,9 +126,9 @@ export default function Home() {
     //console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
     console.log("rendering html", rowsRef.length, "rows");
     for(const row of rowsRef) {
-      const copies = row[headerMap()["count"]-1+countIndex()];
+      const copies = parseInt(row[headerMap()["count"]-1+countIndex()] ?? "0");
       if(copies > 0) {
-        console.log("rendering row");
+        console.log("rendering row with copies ", copies);
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
           container()!.appendChild(card);
