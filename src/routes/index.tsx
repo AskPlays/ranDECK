@@ -75,10 +75,16 @@ export default function Home() {
         map[key.toLowerCase()] = i;
       });
       setHeaderMap(map);
+      console.log(`loaded sheets with ${rows.length} entries`);
     });
-    const filePromise = serverParseFile("Deck.txt").then(setCode);
+    const filePromise = serverParseFile("Deck.txt").then((ast) => {
+      setCode(ast);
+      console.log(`loaded code with ${ast.length} entries`);
+    });
     Promise.all([rowPromise, filePromise]).then(() => {
+      console.log(`finished loading`);
       render();
+      console.log("rendered");
     });
     // setTimeout(async () => {
     //   while(true) {
@@ -114,7 +120,7 @@ export default function Home() {
     const codeRef = code();
     if(!rowsRef || !codeRef) return;
     container()!.innerHTML = "";
-    console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
+    //console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
     for(const row of rowsRef) {
       const copies = row[headerMap()["count"]-1+countIndex()];
       if(copies > 0) {
