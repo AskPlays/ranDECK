@@ -87,13 +87,13 @@ export default function Home() {
       render();
       console.log("rendered");
     });
-    // setTimeout(async () => {
-    //   while(true) {
-    //     setCode(await serverWaitForCode());
-    //     console.log("code updated");
-    //     render();
-    //   }
-    // }, 100);
+    setTimeout(async () => {
+      while(true) {
+        setCode(await serverWaitForCode());
+        console.log("code updated");
+        render();
+      }
+    }, 100);
   });
 
   const render = async () => {
@@ -116,6 +116,7 @@ export default function Home() {
           link.download = "Deck.png";
           link.click();
         }
+        console.log("rendered image");
       }).catch(function (error: any) {
         console.error(error);
       })
@@ -124,18 +125,14 @@ export default function Home() {
     const codeRef = code();
     if(!rowsRef || !codeRef) return;
     container()!.innerHTML = "";
-    //console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
     console.log("rendering html", rowsRef.length, "rows");
     for(const row of rowsRef) {
       const copies = parseInt(row[headerMap()["count"]-1+countIndex()] ?? "0");
       if(copies > 0) {
-        console.log("rendering row with copies ", copies);
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
-          console.log("rendered card");
           container()!.appendChild(card);
         }
-        console.log("rendered row");
       }
     }
     console.log("rendered html");
@@ -451,9 +448,7 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   text.innerHTML = elem.innerHTML;
   text.style.fontFamily = elem.style.fontFamily;
   text.style.fontSize = fontSize;
-  // text.style.width = "inherit";
   if(wrap) text.style.width = parsePercentage(width)*710+"px";
-  // text.style.height = "inherit";
   if(!wrap) text.style.whiteSpace = "nowrap";
   text.style.position = "absolute";
   text.style.visibility = "hidden";
@@ -462,7 +457,6 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   // const heightRatio = parsePercentage(height)*1065/text.getBoundingClientRect().height;
   // const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
   let ratio = 1;
-  console.log(text.getBoundingClientRect().width, parsePercentage(width)*710, text.getBoundingClientRect().height, parsePercentage(height)*1065);
   while((text.getBoundingClientRect().width > parsePercentage(width)*710 || text.getBoundingClientRect().height > parsePercentage(height)*1065) && ratio > 0.01) {
     ratio -= 0.01;
     text.style.fontSize = Math.floor(parseFloat(fontSize)*ratio)+"pt";
@@ -473,17 +467,6 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   const widthRatio = parsePercentage(width)*710/textWidth;
   const heightRatio = parsePercentage(height)*1065/textHeight;
   const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
-  */
-  /*
-  const elt = document.createElement("span");
-  elt.innerText = "test"
-  document.body.appendChild(elt);
-  elt.style.fontSize = 100 + "px";
-  const size1 = elt.getBoundingClientRect();
-  elt.style.fontSize = 10 + "px";
-  const size2 = elt.getBoundingClientRect();
-  console.log(size1, size2);
-  document.body.removeChild(elt);
   */
   return Math.floor(parseFloat(fontSize)*ratio)+"pt";
 }
