@@ -100,27 +100,31 @@ export default function Home() {
     output()!.innerHTML = "";
     setRenderState("Rendering");
     setStartTime(Date.now());
-    setTimeout(() => {toPng(document.getElementById("cards") as HTMLElement, {pixelRatio: 1, includeQueryParams: true}).then(function (dataUrl: string) {
-      setDataUrl(dataUrl);
-      var img = new Image();
-      img.src = dataUrl;
-      document.getElementById("output")?.appendChild(img);
-      setRenderState("Rendered in " + (Date.now()-startTime()) + "ms");
-      serverSaveDeck(dataUrl, deckName());
-      if(download()) {
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = "Deck.png";
-        link.click();
-      }
-    }).catch(function (error: any) {
-      console.error(error);
-    })}, 0);
+    setTimeout(() => {
+      console.log("rendering image");
+      toPng(document.getElementById("cards") as HTMLElement, {pixelRatio: 1, includeQueryParams: true}).then(function (dataUrl: string) {
+        setDataUrl(dataUrl);
+        var img = new Image();
+        img.src = dataUrl;
+        document.getElementById("output")?.appendChild(img);
+        setRenderState("Rendered in " + (Date.now()-startTime()) + "ms");
+        serverSaveDeck(dataUrl, deckName());
+        if(download()) {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "Deck.png";
+          link.click();
+        }
+      }).catch(function (error: any) {
+        console.error(error);
+      })
+    }, 0);
     const rowsRef = rows();
     const codeRef = code();
     if(!rowsRef || !codeRef) return;
     container()!.innerHTML = "";
     //console.log(headerMap()["count"], headerMap()["count"]-1+countIndex())
+    console.log("rendering html", rowsRef.length, "rows");
     for(const row of rowsRef) {
       const copies = row[headerMap()["count"]-1+countIndex()];
       if(copies > 0) {
