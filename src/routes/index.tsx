@@ -128,12 +128,15 @@ export default function Home() {
     for(const row of rowsRef) {
       const copies = row[headerMap()["count"]-1+countIndex()];
       if(copies > 0) {
+        console.log("rendering row");
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
           container()!.appendChild(card);
         }
+        console.log("rendered row");
       }
     }
+    console.log("rendered html");
   }
 
   const uploadDeck = async () => {
