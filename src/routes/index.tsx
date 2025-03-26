@@ -131,6 +131,7 @@ export default function Home() {
         console.log("rendering row with copies ", copies);
         for (let i = 0; i < copies; i++) {
           const card = parseCode(codeRef, row);
+          console.log("rendered card");
           container()!.appendChild(card);
         }
         console.log("rendered row");
@@ -460,7 +461,7 @@ const calcFontSize = (elem: HTMLElement, width: string, height: string, fontSize
   // const heightRatio = parsePercentage(height)*1065/text.getBoundingClientRect().height;
   // const ratio = Math.min(Math.min(widthRatio, heightRatio), 1);
   let ratio = 1;
-  while(text.getBoundingClientRect().width > parsePercentage(width)*710 || text.getBoundingClientRect().height > parsePercentage(height)*1065) {
+  while((text.getBoundingClientRect().width > parsePercentage(width)*710 || text.getBoundingClientRect().height > parsePercentage(height)*1065) && ratio > 0.01) {
     ratio -= 0.01;
     text.style.fontSize = Math.floor(parseFloat(fontSize)*ratio)+"pt";
   }
